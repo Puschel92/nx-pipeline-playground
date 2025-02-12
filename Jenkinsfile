@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     tools {
         nodejs 'Node-22.13.1' // Use the name you configured in Global Tool Configuration
     }
@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             agent any
             steps {
+                sh 'node -v'
                 echo "Building.."
                 sh "npm ci"
             }
