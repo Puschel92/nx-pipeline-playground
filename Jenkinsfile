@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'nx-pipeline-playground'
+            label 'master'
             }
       }
     triggers {
