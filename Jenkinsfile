@@ -1,29 +1,33 @@
 pipeline {
-    agent none
-    environment {
-        NX_BRANCH = env.BRANCH_NAME.replace('PR-', '')
+    agent {
+        node {
+            label 'nx-pipeline-playground'
+            }
+      }
+    triggers {
+        pollSCM '* * * * *'
     }
     stages {
-        stage('Pipeline') {
-            parallel {
-                stage('Main') {
-                    when {
-                        branch 'main'
-                    }
-                    agent any
-                    steps {
-                        sh "npm ci"
-                    }
-                }
-                stage('PR') {
-                    when {
-                        not { branch 'main' }
-                    }
-                    agent any
-                    steps {
-                        sh "npm ci"
-                    }
-                }
+        stage('Build') {
+            steps {
+                echo "Building.."
+                sh '''
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing.."
+                sh '''
+                '''
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Deliver....'
+                sh '''
+                echo "doing delivery stuff.."
+                '''
             }
         }
     }
